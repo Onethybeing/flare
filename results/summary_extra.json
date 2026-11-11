@@ -1,0 +1,62 @@
+{
+ "X1_cfg_LightGBM": {
+  "flow(ours)": {
+   "cfg": {
+    "sfm": 2.0,
+    "q_exp": 0.05,
+    "hops": 2
+   },
+   "kind": "ours",
+   "w": [
+    0.25,
+    0.5,
+    0,
+    "top3"
+   ]
+  },
+  "conncomp": {
+   "cfg": {
+    "sfm": 2.0,
+    "q_exp": 0.05,
+    "hops": 1
+   },
+   "kind": "sum",
+   "w": [
+    0,
+    0,
+    0,
+    "sum"
+   ]
+  }
+ },
+ "X1_cfg_GraphSAGE": {
+  "flow(ours)": {
+   "cfg": {
+    "sfm": 1.5,
+    "q_exp": 0.05,
+    "hops": 1
+   },
+   "kind": "ours",
+   "w": [
+    0,
+    0.5,
+    0,
+    "sum"
+   ]
+  },
+  "conncomp": {
+   "cfg": {
+    "sfm": 1.5,
+    "q_exp": 0.05,
+    "hops": 1
+   },
+   "kind": "sum",
+   "w": [
+    0,
+    0,
+    0,
+    "sum"
+   ]
+  }
+ }
+}

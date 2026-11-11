@@ -1,0 +1,383 @@
+{
+ "audit_tx_edges_same_step": 1.0,
+ "dataset": {
+  "n_tx": 203769,
+  "n_edges": 234355,
+  "illicit": 4545,
+  "licit": 42019,
+  "unknown": 157205,
+  "train_lab": 26905,
+  "val_lab": 4330,
+  "test_lab": 15329
+ },
+ "audit_wallet_features": {
+  "rows": 920691,
+  "addresses_multi_step": 61487,
+  "frac_multi_step_addr_constant_total_txs": 1.0,
+  "frac_multi_step_addr_constant_last_block": 1.0,
+  "frac_rows_counting_future_steps": 0.1061691707641326
+ },
+ "tuned_configs": {
+  "LightGBM|flow(ours)": {
+   "cfg": {
+    "sfm": 1.5,
+    "q_exp": 0.1,
+    "hops": 2
+   },
+   "kind": "ours",
+   "w": [
+    0.5,
+    0.5,
+    0.5,
+    "sum"
+   ]
+  },
+  "LightGBM|conncomp": {
+   "cfg": {
+    "sfm": 1.5,
+    "q_exp": 0.1,
+    "hops": 1
+   },
+   "kind": "sum",
+   "w": [
+    0,
+    0,
+    0,
+    "sum"
+   ]
+  },
+  "LightGBM|ego1hop": {
+   "cfg": {
+    "sfm": 1.5,
+    "q_exp": 0.05,
+    "hops": 1
+   },
+   "kind": "mean",
+   "w": [
+    0,
+    0,
+    0,
+    "sum"
+   ]
+  },
+  "GraphSAGE|flow(ours)": {
+   "cfg": {
+    "sfm": 1.5,
+    "q_exp": 0.05,
+    "hops": 2
+   },
+   "kind": "ours",
+   "w": [
+    1.0,
+    1.0,
+    0,
+    "sum"
+   ]
+  },
+  "GraphSAGE|conncomp": {
+   "cfg": {
+    "sfm": 1.5,
+    "q_exp": 0.05,
+    "hops": 1
+   },
+   "kind": "sum",
+   "w": [
+    0,
+    0,
+    0,
+    "sum"
+   ]
+  },
+  "GraphSAGE|ego1hop": {
+   "cfg": {
+    "sfm": 1.5,
+    "q_exp": 0.05,
+    "hops": 1
+   },
+   "kind": "mean",
+   "w": [
+    0,
+    0,
+    0,
+    "sum"
+   ]
+  }
+ },
+ "E1_top": [
+  {
+   "model": "LightGBM",
+   "features": "AF+AUG+XV",
+   "AP_mean": 0.7502,
+   "AP_std": 0.0008,
+   "F1_mean": 0.764,
+   "P@100_mean": 1.0
+  },
+  {
+   "model": "LightGBM",
+   "features": "AF+AUG",
+   "AP_mean": 0.7468,
+   "AP_std": 0.0016,
+   "F1_mean": 0.7569,
+   "P@100_mean": 1.0
+  },
+  {
+   "model": "LightGBM",
+   "features": "AF+AUG+XVlifetime",
+   "AP_mean": 0.7452,
+   "AP_std": 0.0015,
+   "F1_mean": 0.7515,
+   "P@100_mean": 1.0
+  },
+  {
+   "model": "LightGBM",
+   "features": "AF",
+   "AP_mean": 0.7452,
+   "AP_std": 0.0013,
+   "F1_mean": 0.7621,
+   "P@100_mean": 1.0
+  },
+  {
+   "model": "RF",
+   "features": "AF+AUG+XV",
+   "AP_mean": 0.7265,
+   "AP_std": 0.0025,
+   "F1_mean": 0.7727,
+   "P@100_mean": 1.0
+  },
+  {
+   "model": "LightGBM",
+   "features": "LF",
+   "AP_mean": 0.7255,
+   "AP_std": 0.0011,
+   "F1_mean": 0.7283,
+   "P@100_mean": 1.0
+  },
+  {
+   "model": "RF",
+   "features": "AF",
+   "AP_mean": 0.7254,
+   "AP_std": 0.0014,
+   "F1_mean": 0.6997,
+   "P@100_mean": 1.0
+  },
+  {
+   "model": "RF",
+   "features": "AF+AUG",
+   "AP_mean": 0.7233,
+   "AP_std": 0.0008,
+   "F1_mean": 0.724,
+   "P@100_mean": 1.0
+  },
+  {
+   "model": "SAGE-dir",
+   "features": "AF+AUG+XV",
+   "AP_mean": 0.7201,
+   "AP_std": 0.0221,
+   "F1_mean": 0.6802,
+   "P@100_mean": 1.0
+  },
+  {
+   "model": "SAGE-undir",
+   "features": "AF+AUG",
+   "AP_mean": 0.5615,
+   "AP_std": 0.0427,
+   "F1_mean": 0.537,
+   "P@100_mean": 0.962
+  },
+  {
+   "model": "MLP",
+   "features": "AF+AUG",
+   "AP_mean": 0.4857,
+   "AP_std": 0.0454,
+   "F1_mean": 0.53,
+   "P@100_mean": 0.776
+  },
+  {
+   "model": "LogReg",
+   "features": "AF+AUG+XV",
+   "AP_mean": 0.4018,
+   "AP_std": NaN,
+   "F1_mean": 0.4508,
+   "P@100_mean": 0.57
+  }
+ ],
+ "E2": [
+  {
+   "features": "W-asof",
+   "row_AP_mean": 0.2709,
+   "row_AP_std": 0.0292,
+   "row_F1_mean": 0.3386,
+   "row_F1_std": 0.0344,
+   "addr_AP_mean": 0.2726,
+   "addr_AP_std": 0.0296,
+   "newaddr_AP_mean": 0.2683,
+   "newaddr_AP_std": 0.029,
+   "n_new_addr_mean": 87279.0,
+   "n_new_addr_std": 0.0
+  },
+  {
+   "features": "W-asof+txrisk",
+   "row_AP_mean": 0.6383,
+   "row_AP_std": 0.0024,
+   "row_F1_mean": 0.6267,
+   "row_F1_std": 0.0147,
+   "addr_AP_mean": 0.6445,
+   "addr_AP_std": 0.0024,
+   "newaddr_AP_mean": 0.6445,
+   "newaddr_AP_std": 0.0023,
+   "n_new_addr_mean": 87279.0,
+   "n_new_addr_std": 0.0
+  },
+  {
+   "features": "W-official(lifetime)",
+   "row_AP_mean": 0.3404,
+   "row_AP_std": 0.017,
+   "row_F1_mean": 0.3749,
+   "row_F1_std": 0.034,
+   "addr_AP_mean": 0.3446,
+   "addr_AP_std": 0.0179,
+   "newaddr_AP_mean": 0.3432,
+   "newaddr_AP_std": 0.019,
+   "n_new_addr_mean": 87279.0,
+   "n_new_addr_std": 0.0
+  },
+  {
+   "features": "W-official+txrisk(lifetime)",
+   "row_AP_mean": 0.6281,
+   "row_AP_std": 0.0037,
+   "row_F1_mean": 0.638,
+   "row_F1_std": 0.005,
+   "addr_AP_mean": 0.6357,
+   "addr_AP_std": 0.0031,
+   "newaddr_AP_mean": 0.6383,
+   "newaddr_AP_std": 0.0032,
+   "n_new_addr_mean": 87279.0,
+   "n_new_addr_std": 0.0
+  }
+ ],
+ "E4": [
+  {
+   "risk": "LightGBM",
+   "method": "flow(ours) | ours",
+   "n_groups": 140,
+   "mean_size": 4.25,
+   "median_size": 3.0,
+   "max_size": 21.0,
+   "hit_lenient": 0.3857,
+   "hit_strict": 0.3286,
+   "purity_known": 0.9611,
+   "label_coverage": 0.4319,
+   "null_purity": 0.0555,
+   "null_hit_lenient": 0.0411,
+   "enrichment": 17.3294
+  },
+  {
+   "risk": "LightGBM",
+   "method": "conncomp | sum",
+   "n_groups": 140,
+   "mean_size": 4.8286,
+   "median_size": 3.0,
+   "max_size": 49.0,
+   "hit_lenient": 0.3786,
+   "hit_strict": 0.3214,
+   "purity_known": 0.9599,
+   "label_coverage": 0.4423,
+   "null_purity": 0.0484,
+   "null_hit_lenient": 0.0443,
+   "enrichment": 19.8315
+  },
+  {
+   "risk": "LightGBM",
+   "method": "ego1hop | mean",
+   "n_groups": 140,
+   "mean_size": 2.9857,
+   "median_size": 3.0,
+   "max_size": 6.0,
+   "hit_lenient": 0.4286,
+   "hit_strict": 0.3143,
+   "purity_known": 0.8994,
+   "label_coverage": 0.3804,
+   "null_purity": 0.0474,
+   "null_hit_lenient": 0.0336,
+   "enrichment": 18.9576
+  },
+  {
+   "risk": "GraphSAGE",
+   "method": "flow(ours) | ours",
+   "n_groups": 140,
+   "mean_size": 3.3571,
+   "median_size": 2.0,
+   "max_size": 36.0,
+   "hit_lenient": 0.2929,
+   "hit_strict": 0.2143,
+   "purity_known": 0.92,
+   "label_coverage": 0.3723,
+   "null_purity": 0.0508,
+   "null_hit_lenient": 0.0404,
+   "enrichment": 18.1257
+  },
+  {
+   "risk": "GraphSAGE",
+   "method": "conncomp | sum",
+   "n_groups": 140,
+   "mean_size": 3.5857,
+   "median_size": 2.0,
+   "max_size": 36.0,
+   "hit_lenient": 0.3143,
+   "hit_strict": 0.2214,
+   "purity_known": 0.9259,
+   "label_coverage": 0.3765,
+   "null_purity": 0.0575,
+   "null_hit_lenient": 0.0371,
+   "enrichment": 16.1111
+  },
+  {
+   "risk": "GraphSAGE",
+   "method": "ego1hop | mean",
+   "n_groups": 140,
+   "mean_size": 2.8786,
+   "median_size": 2.0,
+   "max_size": 14.0,
+   "hit_lenient": 0.3857,
+   "hit_strict": 0.2714,
+   "purity_known": 0.8344,
+   "label_coverage": 0.3747,
+   "null_purity": 0.0486,
+   "null_hit_lenient": 0.0368,
+   "enrichment": 17.1665
+  }
+ ],
+ "E5": [
+  {
+   "m": 1,
+   "groups": 117,
+   "d_top": 0.2559,
+   "d_random": 0.0688,
+   "d_bottom": 0.0294,
+   "d_heuristic": 0.3048,
+   "sufficiency": 0.8687,
+   "top_beats_random_frac": 0.5897
+  },
+  {
+   "m": 3,
+   "groups": 106,
+   "d_top": 0.5999,
+   "d_random": 0.2755,
+   "d_bottom": 0.1699,
+   "d_heuristic": 0.4294,
+   "sufficiency": 0.9363,
+   "top_beats_random_frac": 0.6226
+  },
+  {
+   "m": 5,
+   "groups": 84,
+   "d_top": 0.7795,
+   "d_random": 0.4041,
+   "d_bottom": 0.3124,
+   "d_heuristic": 0.4451,
+   "sufficiency": 0.9543,
+   "top_beats_random_frac": 0.619
+  }
+ ],
+ "runtime_min": 30.91083825826645
+}

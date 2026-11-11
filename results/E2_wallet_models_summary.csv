@@ -1,0 +1,5 @@
+features,row_AP_mean,row_AP_std,row_F1_mean,row_F1_std,addr_AP_mean,addr_AP_std,newaddr_AP_mean,newaddr_AP_std,n_new_addr_mean,n_new_addr_std
+W-asof,0.2709,0.0292,0.3386,0.0344,0.2726,0.0296,0.2683,0.029,87279.0,0.0
+W-asof+txrisk,0.6383,0.0024,0.6267,0.0147,0.6445,0.0024,0.6445,0.0023,87279.0,0.0
+W-official(lifetime),0.3404,0.017,0.3749,0.034,0.3446,0.0179,0.3432,0.019,87279.0,0.0
+W-official+txrisk(lifetime),0.6281,0.0037,0.638,0.005,0.6357,0.0031,0.6383,0.0032,87279.0,0.0

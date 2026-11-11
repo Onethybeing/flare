@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+.pytest_cache/
+.ipynb_checkpoints/
+# generated notebooks and Kaggle metadata (rebuilt by make_*.py)
+kaggle/**/*.ipynb
+kaggle/**/kernel-metadata.json
+kaggle/**/out/
+runs/
+# raw data is never committed
+data/
+*.csv.gz
+*.npz
