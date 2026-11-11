@@ -7,8 +7,8 @@ noisy risk model, and compares a transaction queue with a flow-group queue at th
 """
 import numpy as np
 
-from flowgroups import StepGraph, flow_groups, group_features, group_score, pooled, queue_stats, run_queue
-from flowgroups.groups import budget_for
+from flare import StepGraph, flow_groups, group_features, group_score, pooled, queue_stats, run_queue
+from flare.groups import budget_for
 
 rng = np.random.default_rng(0)
 n = 2000

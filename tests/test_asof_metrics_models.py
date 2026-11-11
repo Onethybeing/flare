@@ -4,13 +4,13 @@ import unittest
 import numpy as np
 import pandas as pd
 
-from flowgroups.asof import address_step_table, aggregate_to_transactions, lifetime_leakage_audit
-from flowgroups.metrics import paired_bootstrap_ci
+from flare.asof import address_step_table, aggregate_to_transactions, lifetime_leakage_audit
+from flare.metrics import paired_bootstrap_ci
 
 try:
     import torch
-    from flowgroups.models import DirSAGE
-    from flowgroups.counterfactual import deletion_test, edge_saliency
+    from flare.models import DirSAGE
+    from flare.counterfactual import deletion_test, edge_saliency
 except ImportError:  # pragma: no cover
     torch = None
 

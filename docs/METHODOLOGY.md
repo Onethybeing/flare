@@ -1,4 +1,4 @@
-# Methodology
+# FLARE methodology
 
 ## 1. Problem setting
 
@@ -18,7 +18,7 @@ Thresholds, scalers, tuning grids and score weights never see test labels.
 
 ## 2. Point-in-time (as-of) address features
 
-For address $a$ active at step $t$ (implemented in `flowgroups/asof.py`):
+For address $a$ active at step $t$ (implemented in `flare/asof.py`):
 
 | Feature | Definition |
 |---|---|
@@ -47,7 +47,7 @@ Every stochastic model is trained with 5 seeds; queue experiments use the seed-a
 
 ## 4. Candidate groups
 
-Implemented in `flowgroups/groups.py`; the step graph (`flowgroups/graph.py`) joins transactions by money flow
+Implemented in `flare/groups.py`; the step graph (`flare/graph.py`) joins transactions by money flow
 (either direction) and by shared addresses within the step (chained, only for address-step pairs with at most 10
 transactions).
 
@@ -78,7 +78,7 @@ maximising illicit found summed over the four budgets. Plain max / mean / top-3 
 
 ## 6. Review queues and metrics
 
-`flowgroups/queues.py`: groups are reviewed whole in score order; the group that would overflow $B_t$ is truncated to
+`flare/queues.py`: groups are reviewed whole in score order; the group that would overflow $B_t$ is truncated to
 its highest-risk members; leftover capacity goes to the highest-risk unreviewed transactions. The transaction
 queue is the special case with no groups; the wallet queue reviews addresses in wallet-model order, each covering
 its transactions in the step.

@@ -65,8 +65,9 @@ def banner():
                         arrowprops=dict(arrowstyle="-|>", color=col, lw=1.6, mutation_scale=9))
         ax.scatter(*zip(*pts), s=55, color=col, edgecolor="white", lw=0.8, zorder=5)
         ax.add_patch(plt.Circle((cx, cy), 0.62, fill=False, ec=col, lw=1.2, ls=(0, (3, 2)), alpha=0.9))
-    ax.text(0.45, 2.15, "Flow Groups", fontsize=34, color="white", fontweight="bold")
-    ax.text(0.48, 1.55, "From transactions to cases: leakage-safe review queues", fontsize=12.5, color="#cfe0f5")
+    ax.text(0.45, 2.2, "FLARE", fontsize=40, color="white", fontweight="bold")
+    ax.text(3.05, 2.32, "Flow-Linked Alert REview", fontsize=15, color="#ffb27a", fontweight="bold")
+    ax.text(0.48, 1.55, "From transactions to cases: leakage-safe, case-level review queues", fontsize=12.5, color="#cfe0f5")
     ax.text(0.48, 1.12, "for illicit-flow detection on the Elliptic++ Bitcoin graph", fontsize=12.5, color="#cfe0f5")
     ax.text(0.48, 0.62, "LightGBM  ·  direction-aware GraphSAGE  ·  flow-constrained grouping", fontsize=9.5, color="#8fb0d6")
     ax.text(0.48, 0.32, "point-in-time features  ·  counterfactual evidence  ·  fixed-budget evaluation", fontsize=9.5, color="#8fb0d6")
@@ -235,7 +236,7 @@ def wireframe():
     W = "#f4f4f2"
     ax.add_patch(Rectangle((0.05, 0.05), 11.9, 6.9, fc="white", ec=INK2, lw=1.5))
     ax.add_patch(Rectangle((0.05, 6.35), 11.9, 0.6, fc="#e7e6e2", ec=INK2, lw=1))
-    ax.text(0.3, 6.65, "Flow Groups · Case Review Console", fontsize=12, fontweight="bold", va="center")
+    ax.text(0.3, 6.65, "FLARE · Case Review Console", fontsize=12, fontweight="bold", va="center")
     for i, t in enumerate(["Step 41 ▾", "Budget 1% (37 tx) ▾", "Risk: LightGBM ▾"]):
         box(ax, 6.6 + i * 1.75, 6.45, 1.6, 0.4, t, fc="white", ec=MUTED, fs=8.5)
     # left: case queue

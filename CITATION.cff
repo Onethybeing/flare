@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this code or results, please cite it as below."
-title: "From Transactions to Cases: Leakage-Safe Flow-Group Review Queues for Illicit Bitcoin Flows"
+title: "FLARE: Flow-Linked Alert Review - Leakage-Safe Case-Level Review Queues for Illicit Bitcoin Flows on Elliptic++"
 authors:
   - family-names: Choudhary
     given-names: Sourav
@@ -8,7 +8,7 @@ authors:
 version: 1.0.0
 date-released: 2026-11-12
 license: MIT
-repository-code: "https://github.com/Onethybeing/elliptic-flowgroups"
+repository-code: "https://github.com/Onethybeing/flare"
 keywords:
   - anti-money laundering
   - Elliptic++

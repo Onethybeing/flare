@@ -43,7 +43,7 @@ Per-step counts: [`results/label_counts_per_step.csv`](../results/label_counts_p
 So an address scored at step 25 already "knows" its total number of transactions and its last block, even if
 those happen at step 45. Using these features in a chronological evaluation leaks the future. We therefore rebuilt
 address features from the transaction-address links using only the current and earlier steps
-(`flowgroups/asof.py`), and kept the official features only as a labelled comparator ("lifetime").
+(`flare/asof.py`), and kept the official features only as a labelled comparator ("lifetime").
 
 Effect on results (test PR-AUC, mean over seeds):
 

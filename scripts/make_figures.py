@@ -32,7 +32,7 @@ plt.rcParams.update({
 })
 
 QUEUES = [  # (name in CSV, label, colour, marker)
-    ("flow(ours) | ours", "Flow groups (ours)", BLUE, "o"),
+    ("flow(ours) | ours", "FLARE groups (ours)", BLUE, "o"),
     ("tx-queue (no groups)", "Transaction queue", ORANGE, "s"),
     ("conncomp | sum", "Connected components", AQUA, "^"),
     ("ego1hop | mean", "1-hop neighbourhood", YELLOW, "D"),
@@ -184,7 +184,7 @@ def fig_scarcity():
     fig, ax = plt.subplots(1, 3, figsize=(14, 3.9))
     ax[0].errorbar(fr, d.node_AP_mean, d.node_AP_std.fillna(0), color=INK2, marker="o", capsize=3)
     ax[0].set_title("transaction PR-AUC", loc="left", fontsize=9.5)
-    for tag, name, c, mk in [("flow", "Flow groups (ours)", BLUE, "o"), ("tx", "Transaction queue", ORANGE, "s"),
+    for tag, name, c, mk in [("flow", "FLARE groups (ours)", BLUE, "o"), ("tx", "Transaction queue", ORANGE, "s"),
                              ("cc", "Connected components", AQUA, "^")]:
         ax[1].errorbar(fr, d[f"{tag}_ill@0.01_mean"], d[f"{tag}_ill@0.01_std"].fillna(0), color=c, marker=mk, capsize=3,
                        label=name, lw=2.6 if tag == "flow" else 1.6)
@@ -202,7 +202,7 @@ def fig_scarcity():
 
 def fig_enrichment():
     d = read("E4_group_proxy_metrics.csv")
-    d["lab"] = d.risk + "\n" + d.method.str.replace("flow(ours) | ours", "flow (ours)", regex=False) \
+    d["lab"] = d.risk + "\n" + d.method.str.replace("flow(ours) | ours", "FLARE (ours)", regex=False) \
         .str.replace("conncomp | sum", "conn. comp.", regex=False).str.replace("ego1hop | mean", "1-hop", regex=False)
     x = np.arange(len(d)); wdt = 0.38
     fig, ax = plt.subplots(figsize=(10, 3.8))

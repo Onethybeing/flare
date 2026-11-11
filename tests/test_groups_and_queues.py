@@ -3,10 +3,10 @@ import unittest
 
 import numpy as np
 
-from flowgroups import (StepGraph, cc_groups, ego_groups, flow_groups, group_features, group_score, pooled,
+from flare import (StepGraph, cc_groups, ego_groups, flow_groups, group_features, group_score, pooled,
                         queue_stats, run_queue)
-from flowgroups.graph import same_address_pairs
-from flowgroups.groups import budget_for, select_seeds
+from flare.graph import same_address_pairs
+from flare.groups import budget_for, select_seeds
 
 
 def toy_graph():

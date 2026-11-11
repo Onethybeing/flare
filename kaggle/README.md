@@ -16,5 +16,5 @@ These are the exact sources that produced every number in `results/`.
 5 E1 tabular models, 6 E1 GraphSAGE, 7 E2 wallets, 8 step graph, 9 group builders and queues, 10 E3 tuning and queues,
 11 E4 proxy metrics, 12 E5 counterfactuals, 13 E6 bootstrap, figures and tables.
 
-The tested, documented versions of the core algorithms live in `src/flowgroups/`; the notebook keeps its own copies so
+The tested, documented versions of the core algorithms live in `src/flare/`; the notebook keeps its own copies so
 that the executed code stays exactly as run.

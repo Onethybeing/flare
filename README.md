@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/assets/banner.png" alt="Flow Groups: from transactions to cases on the Elliptic++ Bitcoin graph" width="100%">
+  <img src="docs/assets/banner.png" alt="FLARE: Flow-Linked Alert REview on the Elliptic++ Bitcoin graph" width="100%">
 </p>
 
 <p align="center">
@@ -10,14 +10,17 @@
   <img src="https://img.shields.io/badge/BTP-IIT%20Kharagpur-8a2be2" alt="BTP">
 </p>
 
-# Flow Groups: leakage-safe, case-level review queues for illicit Bitcoin flows
+# FLARE: Flow-Linked Alert REview
+
+**Leakage-safe, case-level review queues for illicit Bitcoin flows on Elliptic++.**
 
 Anti-money-laundering (AML) analysts cannot review every alert. A model that scores transactions
 one by one hands them a ranked list of **isolated alerts**; related transactions from the same
 laundering flow arrive as separate, disconnected tasks. This repository studies a simple change of
 unit: **rank cases, not transactions.** Starting from high-risk transactions, money-flow and
 shared-address links are followed (with hub and size limits) to build compact *flow groups*, and the
-analyst reviews whole groups within the same fixed budget.
+analyst reviews whole groups within the same fixed budget. **FLARE** (Flow-Linked Alert REview) is the
+name of this pipeline: alerts are linked along money flows and reviewed as cases.
 
 Everything is evaluated on the public **Elliptic++** Bitcoin dataset under a strict
 chronological protocol (train steps 1-30, validation 31-35, test 36-49), with point-in-time
@@ -30,7 +33,7 @@ features only.
 
 ## Key findings
 
-| | Transaction queue | **Flow groups (ours)** |
+| | Transaction queue | **FLARE groups (ours)** |
 |---|---|---|
 | Illicit transactions found, 1% budget (LightGBM risk) | 208 | **210** (difference not significant) |
 | Separate cases per 100 reviews | 83.7 | **36.4** (−296 cases, 95% CI [−400, −212]) |
@@ -66,11 +69,11 @@ risk-thresholded graph are an equally strong grouping baseline in yield. See
 
 | Stage | What happens | Code |
 |---|---|---|
-| Point-in-time features | Address activity in the current step plus history from strictly earlier steps; label history only from the training period. Aggregated (mean/max) to each transaction's inputs and outputs. | [`flowgroups/asof.py`](src/flowgroups/asof.py) |
-| Risk models | LightGBM, random forest, logistic regression and a direction-aware GraphSAGE with separate incoming/outgoing flow channels. | [`flowgroups/models.py`](src/flowgroups/models.py), [`kaggle/main/btp_main.py`](kaggle/main/btp_main.py) |
-| Flow groups | Seeds = top-risk transactions; expand at most *h* hops through high-risk neighbours; never expand through hubs (degree > 30); split groups over 40 members with Louvain. | [`flowgroups/groups.py`](src/flowgroups/groups.py) |
-| Review queue | Review exactly *B = b%* of a step's transactions: whole groups in score order, the last group truncated by risk, remaining capacity filled by top-risk transactions. | [`flowgroups/queues.py`](src/flowgroups/queues.py) |
-| Evidence | Gradient of the group score w.r.t. edge weights selects evidence edges; deletion tests compare against random, bottom-ranked and heuristic edges. | [`flowgroups/counterfactual.py`](src/flowgroups/counterfactual.py) |
+| Point-in-time features | Address activity in the current step plus history from strictly earlier steps; label history only from the training period. Aggregated (mean/max) to each transaction's inputs and outputs. | [`flare/asof.py`](src/flare/asof.py) |
+| Risk models | LightGBM, random forest, logistic regression and a direction-aware GraphSAGE with separate incoming/outgoing flow channels. | [`flare/models.py`](src/flare/models.py), [`kaggle/main/btp_main.py`](kaggle/main/btp_main.py) |
+| Flow groups | Seeds = top-risk transactions; expand at most *h* hops through high-risk neighbours; never expand through hubs (degree > 30); split groups over 40 members with Louvain. | [`flare/groups.py`](src/flare/groups.py) |
+| Review queue | Review exactly *B = b%* of a step's transactions: whole groups in score order, the last group truncated by risk, remaining capacity filled by top-risk transactions. | [`flare/queues.py`](src/flare/queues.py) |
+| Evidence | Gradient of the group score w.r.t. edge weights selects evidence edges; deletion tests compare against random, bottom-ranked and heuristic edges. | [`flare/counterfactual.py`](src/flare/counterfactual.py) |
 
 <p align="center">
   <img src="docs/assets/group_construction.png" alt="Group construction: risk scores, seeds, flow-constrained expansion, cases" width="100%">
@@ -98,8 +101,8 @@ counterfactual evidence edges highlighted, and the numbers behind the score.
 ## Quick start
 
 ```bash
-git clone https://github.com/Onethybeing/elliptic-flowgroups.git
-cd elliptic-flowgroups
+git clone https://github.com/Onethybeing/flare.git
+cd flare
 pip install -e .            # numpy, scipy, pandas, networkx (torch optional)
 python -m unittest discover -s tests -v     # 35 tests
 python examples/quickstart.py
@@ -117,7 +120,7 @@ flow-group queue   reviewed=20  illicit found=12  cases per 100 reviewed= 25.0  
 
 ```python
 import numpy as np
-from flowgroups import StepGraph, flow_groups, group_features, group_score, run_queue, queue_stats, pooled
+from flare import StepGraph, flow_groups, group_features, group_score, run_queue, queue_stats, pooled
 
 G = StepGraph(n, flow_src, flow_dst, addr_a, addr_b)          # one time step (or a window)
 groups = flow_groups(G, nodes, risk, seed_frac=0.015, q_exp=0.1, hops=2, hub_degree=30, max_size=40)
@@ -144,7 +147,7 @@ every chart from the CSVs and `python scripts/make_diagrams.py` redraws the diag
 ## Repository layout
 
 ```
-src/flowgroups/       tested package: as-of features, step graph, groups, queues, metrics, GraphSAGE, counterfactuals
+src/flare/       tested package: as-of features, step graph, groups, queues, metrics, GraphSAGE, counterfactuals
 tests/                35 unit tests (unittest; also runnable with pytest)
 kaggle/               exact notebook sources that produced the results (main, supplementary, figure runs)
 results/              all result tables (CSV + markdown) and run summaries
@@ -172,12 +175,12 @@ screening on a public blockchain benchmark, not a production AML or compliance s
 ## Citation
 
 ```bibtex
-@misc{choudhary2026flowgroups,
+@misc{choudhary2026flare,
   author       = {Sourav Choudhary},
-  title        = {From Transactions to Cases: Leakage-Safe Flow-Group Review Queues for Illicit Bitcoin Flows},
+  title        = {FLARE: Flow-Linked Alert Review -- Leakage-Safe Case-Level Review Queues for Illicit Bitcoin Flows on Elliptic++},
   year         = {2026},
   howpublished = {M.Sc. (Economics) Thesis Project (BTP-1), Indian Institute of Technology Kharagpur},
-  url          = {https://github.com/Onethybeing/elliptic-flowgroups}
+  url          = {https://github.com/Onethybeing/flare}
 }
 ```
 
